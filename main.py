@@ -81,7 +81,7 @@ def display_hangman(tries):
 
 
 def play(word):
-    return
+    return 1
 
 
 word_list = ['год', 'человек', 'время', 'дело', 'жизнь', 'день', 'рука', 'раз', 'работа', 'слово', 'место', 'лицо',
