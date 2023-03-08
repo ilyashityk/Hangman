@@ -81,7 +81,44 @@ def display_hangman(tries):
 
 
 def play(word):
-    return 1
+    word_completion = '_' * len(word)  # строка, содержащая символы _ на каждую букву задуманного слова
+    guessed = False  # сигнальная метка
+    guessed_letters = []  # список уже названных букв
+    guessed_words = []  # список уже названных слов
+    tries = 6  # количество попыток
+    print("Let's play the Hangman")
+    print(display_hangman(tries))
+    print(word_completion)
+
+    for tries > 0:
+        while True:
+            word_or_letter_guess = input().upper()
+            if not word_or_letter_guess.isalpha():
+                print("Please enter valid letter or word")
+                word_or_letter_guess = input().upper()
+            break
+
+        while True:
+            if (len(word_or_letter_guess) == 1) and (word_or_letter_guess not in guessed_letters):
+                guessed_letters.append(word_or_letter_guess)
+                break
+            elif (len(word_or_letter_guess) > 1) and (word_or_letter_guess not in guessed_words):
+                guessed_words.append(word_or_letter_guess)
+                break
+            else:
+                print('You already tried to guess this word or letter. Try again.')
+        if word_or_letter_guess in word:
+            if len(word_or_letter_guess) == 1:
+                sdf
+            else:
+                print('Congratulations! You guessed the word', word, 'with', tries, 'tries left!')
+                exit()
+        else:
+            tries -= 1
+            print(display_hangman(tries))
+            print(word_completion)
+
+
 
 
 word_list = ['год', 'человек', 'время', 'дело', 'жизнь', 'день', 'рука', 'раз', 'работа', 'слово', 'место', 'лицо',
@@ -187,4 +224,6 @@ word_list = ['год', 'человек', 'время', 'дело', 'жизнь',
             'философия', 'мощность', 'обязательство', 'уход', 'горло', 'кризис', 'указание', 'плата', 'яблоко',
             'препарат', 'действительность', 'москвич', 'остаток', 'изображение', 'сделка', 'сочинение',
             'покупатель', 'танк', 'затрата', 'строка', 'единица']
+
+
 print(get_word())
