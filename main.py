@@ -120,7 +120,7 @@ def play(word):
                 print(word_completion)
             else:
                 print('Congratulations! You guessed the word', word, 'with', tries, 'tries left!')
-                exit()
+                return True
         else:
             tries -= 1
             print(display_hangman(tries))
@@ -231,4 +231,11 @@ word_list = ['год', 'человек', 'время', 'дело', 'жизнь',
             'философия', 'мощность', 'обязательство', 'уход', 'горло', 'кризис', 'указание', 'плата', 'яблоко',
             'препарат', 'действительность', 'москвич', 'остаток', 'изображение', 'сделка', 'сочинение',
             'покупатель', 'танк', 'затрата', 'строка', 'единица']
+
 play(get_word())
+
+answer = input('Do you want to play one more time? (y/n) ')
+while answer == 'y':
+    play(get_word())
+    answer = input('Do you want to play one more time? (y/n) ')
+print('Thank you for playing. Good luck!')
