@@ -80,6 +80,14 @@ def display_hangman(tries):
     return stages[tries]
 
 
+def guess():
+    word_or_letter_guess = input().upper()
+    while not word_or_letter_guess.isalpha():
+        print("Please enter valid letter or word")
+        word_or_letter_guess = input().upper()
+    return word_or_letter_guess
+
+
 def play(word):
     word_completion = '_' * len(word)  # строка, содержащая символы _ на каждую букву задуманного слова
     guessed = False  # сигнальная метка
@@ -90,15 +98,9 @@ def play(word):
     print(display_hangman(tries))
     print(word_completion)
 
-    for tries > 0:
-        while True:
-            word_or_letter_guess = input().upper()
-            if not word_or_letter_guess.isalpha():
-                print("Please enter valid letter or word")
-                word_or_letter_guess = input().upper()
-            break
-
-        while True:
+    while tries > 0:
+        word_or_letter_guess = guess()
+        while word_or_letter_guess != word:
             if (len(word_or_letter_guess) == 1) and (word_or_letter_guess not in guessed_letters):
                 guessed_letters.append(word_or_letter_guess)
                 break
@@ -107,9 +109,15 @@ def play(word):
                 break
             else:
                 print('You already tried to guess this word or letter. Try again.')
+                word_or_letter_guess = guess()
         if word_or_letter_guess in word:
             if len(word_or_letter_guess) == 1:
-                sdf
+                indexes = [i for i, j in enumerate(word) if j == word_or_letter_guess]
+                for h in range(0, len(indexes)):
+                    word_completion2 = word_completion[:indexes[h]] + word_or_letter_guess + word_completion[indexes[h]+1:]
+                    word_completion = word_completion2
+                print(display_hangman(tries))
+                print(word_completion)
             else:
                 print('Congratulations! You guessed the word', word, 'with', tries, 'tries left!')
                 exit()
@@ -117,8 +125,7 @@ def play(word):
             tries -= 1
             print(display_hangman(tries))
             print(word_completion)
-
-
+    print('You loose :( Word was -', word)
 
 
 word_list = ['год', 'человек', 'время', 'дело', 'жизнь', 'день', 'рука', 'раз', 'работа', 'слово', 'место', 'лицо',
@@ -224,6 +231,4 @@ word_list = ['год', 'человек', 'время', 'дело', 'жизнь',
             'философия', 'мощность', 'обязательство', 'уход', 'горло', 'кризис', 'указание', 'плата', 'яблоко',
             'препарат', 'действительность', 'москвич', 'остаток', 'изображение', 'сделка', 'сочинение',
             'покупатель', 'танк', 'затрата', 'строка', 'единица']
-
-
-print(get_word())
+play(get_word())
